@@ -25,10 +25,41 @@ function configureViewport(exitEditMode=true){
 	
 	console.log(currentSiteState);
 	console.log(mode);
-	
+	animateIndicator();
 	stateTransition(exitEditMode);
 }
-
+function animateIndicator(){
+	if(currentSiteState === siteStateEnum.Create){
+		$(".navigationIndicator").animate({
+			marginLeft: "1048px",
+			width: "92px"
+		});
+	}
+	else if(currentSiteState === siteStateEnum.CreateSet){
+		$(".navigationIndicator").animate({
+			marginLeft: "1180px",
+			width: "85px"
+		});
+	}
+	else if(currentSiteState === siteStateEnum.Browse){
+		$(".navigationIndicator").animate({
+			marginLeft: "1308px",
+			width: "140px"
+		});
+	}
+	else if(currentSiteState === siteStateEnum.Calculate){
+		$(".navigationIndicator").animate({
+			marginLeft: "1490px",
+			width: "130px"
+		});
+	}
+	else if(currentSiteState === siteStateEnum.Download){
+		$(".navigationIndicator").animate({
+			marginLeft: "1660px",
+			width: "80px"
+		});
+	}
+}
 
 function stateTransition(exitEditMode=true){
 	
