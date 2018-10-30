@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ITEM Designer V0.01</title>
+<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="js/siteManager.js"></script> 
+<script src="savedItemData/download.js"></script>
+<script src="js/Item.js"></script> 
+<script src="js/itemSet.js"></script>
+<script src="js/createItem.js"></script>
+<script src="js/itemPreview.js"></script>
+<script src="js/itemBrowser.js"></script>
+	
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body onLoad="onLoad(); configureViewport();" >
+<!-- Main Container -->
+<div class="container"> <!-- Navigation -->
+  <header> <a href="">
+    <h4 class="logo" data_temp_dwid="1">ITEM Designer V0.01</h4>
+  </a>
+    <nav>
+      <ul>
+        <li><a onClick="addUrlParameter('?mode=create'); configureViewport();">CREATE ITEMS</a></li>
+		  <li><a onClick="addUrlParameter('?mode=createSet'); configureViewport();">CREATE SETS</a></li>
+        <li><a onClick="addUrlParameter('?mode=browse'); configureViewport();">BROWSE ITEMS/SETS</a></li>
+        <li> <a onClick="addUrlParameter('?mode=calculate'); configureViewport();">HERO CALCULATOR</a></li>
+		   <li> <a onClick="addUrlParameter('?mode=download'); configureViewport();">DOWNLOADS</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <!-- About Section -->
+	<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	<br/>
+	
+  
+	
+  <div class="Warning" id="Warning" onClick="addUrlParameter('?mode=browse'); configureViewport(); clearAllInputs();"><p style="margin-top: 5px; ">You are currently editing an item. Press here to abort!</p></div>
+  <div class="ItemCreator" id = "ItemCreator">
+<div class="ItemCreatorName">
+      <label for="itemName" class="itemname" id="itemname">Item Name:</label>
+      <input name="itemName" type="text" class="itemName" id="itemName" onChange="updatePreview();">
+      <table width="200" border="0" class="dfd MainStatsTable" id="MainStatsTable">
+        <tbody>
+          <tr>
+            <td>Main Statistics</td>
+            <td>Min</td>
+            <td>Max</td>
+          </tr>
+          <tr>
+            <td><label for="WeaponDamage">WeaponDamage:</label></td>
+            <td><input type="number" name="number2" id="WeaponDamage" onChange="updatePreview();"></td>
+            <td><input type="number" name="number3" id="WeaponDamageMax" onChange="updatePreview();"></td>
+          </tr>
+          <tr>
+            <td><label for="AttackSpeed">AttackSpeed:</label></td>
+            <td><input type="number" name="number2" id="AttackSpeed" onChange="updatePreview();"></td>
+            <td><input type="number" name="number3" id="AttackSpeedMax" onChange="updatePreview();"></td>
+          </tr>
+          <tr>
+            <td><label for="Armor">Armor:</label></td>
+            <td><input type="number" name="number2" id="Armor" onChange="updatePreview();"></td>
+            <td><input type="number" name="number3" id="ArmorMax" onChange="updatePreview();"></td>
+          </tr>
+          <tr>
+            <td><label for="MovementSpeed">MovementSpeed:</label></td>
+            <td><input type="number" name="number2" id="MovementSpeed" onChange="updatePreview();"></td>
+            <td><input type="number" name="number3" id="MovementSpeedMax" onChange="updatePreview();"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="descriptionArea textarealabel">
+        <label for="description" id="textarealabel">Item Description: </label>
+        <textarea name="description" class="textarea" id="description" onChange="updatePreview();"></textarea>
+      </div>
+      <div class="descriptionArea unidqueSecondayrArea">
+        <label for="uniqueSecondary" id="textarealabel">Unique Secondary:</label>
+        <textarea name="uniqueSecondary" class="uniqueSecondary" id="uniqueSecondary" onChange="updatePreview();"></textarea>
+      </div>
+      <input name="button" onClick="createItem()" type="button" class="createItem" value="Create Item">
+    </div>
+    <div class="itemtypequality">
+      <label for="ItemType" class="itemtype">Item Type:</label>
+      <select name="ItemType" class="itemTypeSelect" id="ItemType" onChange="itemTypeChanged(); updatePreview();">
+        <option value="BodyArmor">BodyArmor</option>
+        <option value="Boots">Boots</option>
+        <option value="Helmet">Helmet</option>
+        <option value="Trigger">Trigger</option>
+        <option value="LoadingMechanism">LoadingMechanism</option>
+        <option value="FiringMechanism">FiringMechanism</option>
+        <option value="EnergyContainer">EnergyContainer</option>
+        <option value="Barrel">Barrel</option>
+        <option value="AmmoClip">AmmoClip</option>
+        <option value="Stock">Stock</option>
+        <option value="BarrelAttachement">BarrelAttachement</option>
+        <option value="Scope">Scope</option>
+        <option value="CosmeticAttachment">CosmeticAttachment</option>
+		 <option value="BossAbilityItem">BossAbilityItem</option>
+      </select>
+      <br>
+      <label for="ItemQuality" class="itemquality">Item Quality:</label>
+      <select name="ItemQuality" class="itemQualitySelect" id="ItemQuality" onChange="itemQualityChanged(); onChange="updatePreview();"">
+        <option value="Simple">Simple</option>
+        <option value="Unusual">Unusual</option>
+        <option value="Extraordinary">Extraordinary</option>
+        <option value="Set">Set</option>
+        <option value="Mythical">Mythical</option>
+      </select>
+      <br>
+      <label for="minimumLevel" class="minimumLevelLabel" id="minimumLevelLabel">Minimum Level:</label>
+      <input name="minimumLevel" type="number" class="minimumLevelInput" id="minimumLevel" onChange="updatePreview();">
+      <br>
+      <label for="durability" class="minimumLevelLabel" id="minimumLevelLabel">Durability:</label>
+      <input name="minimumLevel" type="number" class="durability" id="durability" onChange="updatePreview();">
+		<br>
+      <label for="randomCount" class="minimumLevelLabel" id="minimumLevelLabel">Random Count:</label>
+      <input name="randomCount" type="number" class="randomCount" id="randomCount" onChange="updatePreview();">
+			<br>
+      <label for="damageType" class="minimumLevelLabel" id="damageTypeText">Damage Type:</label>
+      	 <select name="damageType" class="damageType" id="damageType" onChange="updatePreview();">
+        <option value="Simple">FireDamage</option>
+        <option value="Unusual">ColdDamage</option>
+        <option value="Extraordinary">PoisonDamage</option>
+        <option value="Set">PhysicalDamage</option>
+      </select>
+    </div>
+<div class="SecondaryStats">
+  <table width="200" border="0" class="secondaryStats">
+      <tbody>
+        <tr>
+          <td>Secondary Statistics</td>
+          <td>Min</td>
+          <td>Max</td>
+			<td>Add/Multiply</td>
+			<td>Guaranteed/Random</td>
+        </tr>
+        <tr>
+          <td><label for="CritChance">CritChance:</label></td>
+          <td><input type="number" name="Min" id="CritChance" onChange="updatePreview();"></td>
+          <td><input type="number" name="Max" id="CritChanceMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="CritChanceAddMult"    onChange="updatePreview();" >
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="CritChanceGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+				
+        </tr>
+        <tr>
+          <td><label for="CritDamage">CritDamage:</label></td>
+          <td><input type="number" name="number2" id="CritDamage" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="CritDamageMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="CritDamageAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="CritDamageGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="ElementalDamage">ElementalDamage:</label></td>
+          <td><input type="number" name="number2" id="ElementalDamage" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="ElementalDamageMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="ElementalDamageAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="ElementalDamageGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+		  <tr>
+          <td><label for="PhysicalDamage">PhysicalDamage:</label></td>
+          <td><input type="number" name="number2" id="PhysicalDamage" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="PhysicalDamageMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="PhysicalDamageAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="PhysicalDamageGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+		  <tr>
+          <td><label for="ColdDamage">ColdDamage:</label></td>
+          <td><input type="number" name="number2" id="ColdDamage" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="ColdDamageMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="ColdDamageAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="ColdDamageGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+		  <tr>
+          <td><label for="FireDamage">FireDamage:</label></td>
+          <td><input type="number" name="number2" id="FireDamage" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="FireDamageMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="FireDamageAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="FireDamageGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+		  <tr>
+          <td><label for="PoisonDamage">PoisonDamage:</label></td>
+          <td><input type="number" name="number2" id="PoisonDamage" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="PoisonDamageMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="PoisonDamageAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="PoisonDamageGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="PhysicalResist">PhysicalResist:</label></td>
+          <td><input type="number" name="number2" id="PhysicalResist" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="PhysicalResistMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="PhysicalResistAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="PhysicalResistGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="ColdResist">ColdResist:</label></td>
+          <td><input type="number" name="number2" id="ColdResist" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="ColdResistMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="ColdResistAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="ColdResistGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="FireResist">FireResist:</label></td>
+          <td><input type="number" name="number2" id="FireResist" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="FireResistMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="FireResistAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="FireResistGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="PoisonResist">PoisonResist:</label></td>
+          <td><input type="number" name="number2" id="PoisonResist" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="PoisonResistMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="PoisonResistAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="PoisonResistGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="Health">Health:</label></td>
+          <td><input type="number" name="number2" id="Health" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="HealthMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="HealthAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="HealthGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="LifeOnHit">LifeOnHit:</label></td>
+          <td><input type="number" name="number2" id="LifeOnHit" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="LifeOnHitMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="LifeOnHitAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="LifeOnHitGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="LifeOnKill">LifeOnKill:</label></td>
+          <td><input type="number" name="number2" id="LifeOnKill" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="LifeOnKillMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="LifeOnKillAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="LifeOnKillGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="LifeBonus">LifeBonus:</label></td>
+          <td><input type="number" name="number2" id="LifeBonus" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="LifeBonusMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="LifeBonusAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="LifeBonusGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="Energy">Energy:</label></td>
+          <td><input type="number" name="number2" id="Energy" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="EnergyMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="EnergyAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="EnergyGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="EnergyRegen">EnergyRegen:</label></td>
+          <td><input type="number" name="number2" id="EnergyRegen" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="EnergyRegenMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="EnergyRegenAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="EnergyRegenGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="EnergyCostReduction">EnergyCostReduction:</label></td>
+          <td><input type="number" name="number2" id="EnergyCostReduction" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="EnergyCostReductionMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="EnergyCostReductionAddMult"  onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="EnergyCostReductionGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+        <tr>
+          <td><label for="EnergyOnHit">EnergyOnHit:</label></td>
+          <td><input type="number" name="number2" id="EnergyOnHit" onChange="updatePreview();"></td>
+          <td><input type="number" name="number3" id="EnergyOnHitMax" onChange="updatePreview();"></td>
+			<td><select name="AddMult" id="EnergyOnHitAddMult" onChange="updatePreview();">
+      			<option value="Additive">Additive</option>
+      			<option value="Multiplicative">Multiplicative</option></td>
+				<td><select name="GuaranteedRandom"  id="EnergyOnHitGuaRand" onChange="updatePreview();">
+      			<option value="Guaranteed">Guaranteed</option>
+      			<option value="Random">Random</option></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="ItemSetCreator" id = "ItemSetCreator">
+	<label for="setName" class="setName" id="setNameLabel">Set Name:</label>
+      <input name="setName" type="text" class="setName" id="setName">
+	<br />
+	<label for="setDescription" id="setDescriptionLabel" class="setDescription">Set Description: </label>
+        <textarea name="setDescription" class="setDescription" id="setDescription" onChange="updatePreview();"></textarea>
+	<br />
+	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 1: </label>
+        <textarea name="setBonus" class="setBonus" id="setBonus1" onChange="updatePreview();"></textarea>
+	<br />
+	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 2: </label>
+        <textarea name="setBonus" class="setBonus" id="setBonus2" onChange="updatePreview();"></textarea>
+	<br />
+	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 3: </label>
+        <textarea name="setBonus" class="setBonus" id="setBonus3" onChange="updatePreview();"></textarea>
+	<br />
+	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 4: </label>
+        <textarea name="setBonus" class="setBonus" id="setBonus4" onChange="updatePreview();"></textarea>
+	<br />
+	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 5: </label>
+        <textarea name="setBonus" class="setBonus" id="setBonus5" onChange="updatePreview();"></textarea>
+	</div>
+  
+  <div class = "ItemBrowser" id = "ItemBrowser" >
+    <label for="ItemType" class="itemtype">Item Type:</label>
+      <select name="ItemType" class="itemTypeSelect" id="ItemTypeBrowse" onChange="displayItems();">
+        <option value="BodyArmor">BodyArmor</option>
+        <option value="Boots">Boots</option>
+        <option value="Helmet">Helmet</option>
+        <option value="Trigger">Trigger</option>
+        <option value="LoadingMechanism">LoadingMechanism</option>
+        <option value="FiringMechanism">FiringMechanism</option>
+        <option value="EnergyContainer">EnergyContainer</option>
+        <option value="Barrel">Barrel</option>
+        <option value="AmmoClip">AmmoClip</option>
+        <option value="Stock">Stock</option>
+        <option value="BarrelAttachement">BarrelAttachement</option>
+        <option value="Scope">Scope</option>
+        <option value="CosmeticAttachment">CosmeticAttachment</option>
+		  <option value="BossAbilityItem">BossAbilityItem</option>
+      </select>
+    <table width="200" border="0" id="itemBrowserTable" class ="itemBrowserTable">
+  <tbody>
+    <tr >
+      	<td>Name</td>
+      	<td>Quality</td>
+		<td>Id</td>
+		<td>View</td>
+		<td>Edit</td>
+		<td>Delete</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+	
+	<div class = "ItemBrowser" id = "Downloads" > 
+	 <button onClick="download('http://xoaproductions.com/ItemDesigner/savedItemData/Items.json');">Download Items.json</button>
+	</div>
+	
+	
+  <div class="copyright"> &copy;2018 - XOAProductions</div>
+  <div class="ItemPreview" id="ItemPreview">
+    <h6 class="previewText" id="previewText"></h6>
+    <h1 class="ItemPreviewName" id="ItemPreviewName"></h1>
+    <h1 class="ItemPreviewMainStat" id="ItemPreviewMainStat"></h1>
+    <h1 class="ItemPreviewSecondaryStatText" id="ItemPreviewSecondaryStatText"><br>
+      <br>
+      Secondary: </h1>
+    <h1 class="ItemPreviewSeondaryStats" id="ItemPreviewSecondaryStats"></h1>
+    <h1 class="ItemPreviewSecondaryStatText" id="ItemPreviewSecondaryStatText">Unique Secondary: </h1>
+    <h1 class="ItemPreviewUniqueSecondary" id="ItemPreviewUniqueSecondary"></h1>
+    <h1 class="ItemPreviewDescription" id="ItemPreviewDescription">&nbsp;</h1>
+  </div>
+</div>
+<!-- Main Container Ends -->
+</body>
+</html>
