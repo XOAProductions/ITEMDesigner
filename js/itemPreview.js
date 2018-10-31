@@ -41,7 +41,7 @@ function updatePreview(itemID = null){
 		y=0;
 		for(y = 0; y < mainValueNames.length; y++){
 			if(completeItem.Statistics[mainValueNames[y]]  === null  ||  completeItem.Statistics[mainValueNames[y]]  === undefined){
-				values.push(new StatisticValue(null, null, 0,0));
+				values.push(new StatisticValue(NaN, NaN, 0,0));
 				continue;
 			}
 			if(completeItem.Statistics[mainValueNames[y]].valueMin === null)
@@ -94,7 +94,7 @@ function updatePreview(itemID = null){
 			}
 		}
 		else if(!isNaN(values[i].valueMin) && !isNaN(values[i].valueMax) && values[i].guaranteedOrRandom === 1){
-			if(values[i].calculationtype === 0){
+			if(values[i].calculationType === 0){
 				secondaryRandomString += "<br/>" + values[i].valueMin + " - " + values[i].valueMax + " additional " + baseValueNames[i];
 			}
 			else{
