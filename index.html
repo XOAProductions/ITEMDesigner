@@ -9,7 +9,7 @@
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="js/siteManager.js"></script> 
-<script src="savedItemData/download.js"></script>
+<script src="js/download.js"></script>
 <script src="js/Item.js"></script> 
 <script src="js/itemSet.js"></script>
 <script src="js/createItem.js"></script>
@@ -29,19 +29,25 @@
 <body onLoad="onLoad(); configureViewport();" >
 <!-- Main Container -->
 <div class="container"> <!-- Navigation -->
-  <header> <a href="">
+  
+  <header>
+    <div class ="navigationTop" id="navigationTop"> <a href="">
     <h4 class="logo" data_temp_dwid="1">ITEM Designer V0.01</h4>
   </a>
-    <nav>
-      <ul>
-        <li><a onClick="addUrlParameter('?mode=create'); configureViewport();">CREATE ITEMS</a></li>
-		  <li><a onClick="addUrlParameter('?mode=createSet'); configureViewport();">CREATE SETS</a></li>
-        <li><a onClick="addUrlParameter('?mode=browse'); configureViewport();">BROWSE ITEMS/SETS</a></li>
-        <li> <a onClick="addUrlParameter('?mode=calculate'); configureViewport();">HERO CALCULATOR</a></li>
-		   <li> <a onClick="addUrlParameter('?mode=download'); configureViewport();">DOWNLOADS</a></li>
+	
+	  <div class="navigationIndicator" id="navigationIndicator">  <hr>
+</div>
+	  <nav >
+	  <ul>
+	    <li><a onClick="addUrlParameter('?mode=create'); configureViewport();">CREATE ITEMS</a></li>
+	    <li><a onClick="addUrlParameter('?mode=createSet'); configureViewport();">CREATE SETS</a></li>
+	    <li><a onClick="addUrlParameter('?mode=browse'); configureViewport();">BROWSE ITEMS/SETS</a></li>
+	    <li> <a onClick="addUrlParameter('?mode=calculate'); configureViewport();">HERO CALCULATOR</a></li>
+	    <li> <a onClick="addUrlParameter('?mode=download'); configureViewport();">DOWNLOADS</a></li>
       </ul>
-    </nav>
-  </header>
+  </nav>
+</div>
+</header>
   <!-- Hero Section -->
   <!-- About Section -->
 	<br>
@@ -92,9 +98,9 @@
         <label for="uniqueSecondary" id="textarealabel">Unique Secondary:</label>
         <textarea name="uniqueSecondary" class="uniqueSecondary" id="uniqueSecondary" onChange="updatePreview();"></textarea>
       </div>
-      <input name="button" onClick="createItem()" type="button" class="createItem" value="Create Item">
+<input name="button" onClick="createItem()" type="button" class="createItem" value="Create Item">
     </div>
-    <div class="itemtypequality">
+<div class="itemtypequality">
       <label for="ItemType" class="itemtype">Item Type:</label>
       <select name="ItemType" class="itemTypeSelect" id="ItemType" onChange="itemTypeChanged(); updatePreview();">
         <option value="BodyArmor">BodyArmor</option>
