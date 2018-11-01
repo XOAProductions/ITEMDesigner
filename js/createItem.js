@@ -6,6 +6,8 @@ var editMode = false;
 
 var ItemsLists = {BodyArmorList : [], BootsList: [], HelmetList: [], TriggerList: [], LoadingMechanismList: [], FiringMechanismList: [], EnergyContainerList: [], BarrelList: [], AmmoClipList: [], StockList: [], BarrelAttachmentList: [], ScopeList: [], CosmeticAttachmentList: [], BossAbilityItemList:[]};
 
+var ItemsListsNames = ["BodyArmorList", "BootsList", "HelmetList", "TriggerList", "LoadingMechanismList", "FiringMechanismList", "EnergyContainerList", "BarrelList", "AmmoClipList", "StockList", "BarrelAttachmentList", "ScopeList", "CosmeticAttachmentList", "BossAbilityItemList"];
+
 //called when create item is pressed
 function createItem(){
 	var values = getAllInputValues();
@@ -422,6 +424,7 @@ function onLoad(){
 	clearAllInputs();
 	
 	loadData();
+	loadSets();
 	
 }
 

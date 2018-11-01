@@ -32,9 +32,9 @@ function displayItems(){
 			tableContents += "<td>" + itemList[i].name + "</td>";
 			tableContents += "<td>" + itemList[i].quality + "</td>";
 			tableContents += "<td>" + itemList[i].id + "</td>";
-			tableContents += "<td> <button type = 'button' id='" + itemList[i].id + "_View'> View Stats </ button>";
-			tableContents += "<td> <button type = 'button' id='" + itemList[i].id + "_Edit'> Edit </ button>";
-			tableContents += "<td> <button type = 'button' id='" + itemList[i].id + "_Delete'> Delete </ button>";
+			tableContents += "<td> <button type = 'button' id='" + itemList[i].id + "_View'> View Stats </ button> </td>";
+			tableContents += "<td> <button type = 'button' id='" + itemList[i].id + "_Edit'> Edit </ button></td>";
+			tableContents += "<td> <button type = 'button' id='" + itemList[i].id + "_Delete'> Delete </ button></td>";
 			tableContents += "</tr>";
 			
 	}

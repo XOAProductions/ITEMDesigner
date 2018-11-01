@@ -1,5 +1,6 @@
 @charset "UTF-8";
 /* Body */
+
 body {
 	font-family: source-sans-pro;
 	background-color: #f2f2f2;
@@ -38,6 +39,18 @@ hr{
 	font-size:30px;
 	color: darkgoldenrod;
 	width:100%;
+}
+.containedItemDiv{
+	position:absolute;
+	margin-left: 700px;
+	-moz-margin-top:-440px;
+	margin-top:-340px;
+}
+.setItemsListDiv{
+	position:absolute;
+	margin-left: 1000px;
+	-moz-margin-top:-440px;
+	margin-top:-340px;
 }
 .Warning{
 	position: absolute;
