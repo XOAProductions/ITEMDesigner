@@ -158,13 +158,27 @@ function findSet(id){
 }
 
 function deleteSet(id){
-	var index = indexOfSet(id);
+	var goAhead = window.confirm("Do you really want to delete set " + id + " ?");
 	
-	if(index !== -1){
-		SetList.splice(index, 1);
-		saveSetList();
+	if(goAhead){
+		var index = indexOfSet(id);
+		
+		if(index !== -1){
+			SetList.splice(index, 1);
+			saveSetList();
+		}
 	}
 }
+
+function loadSetForEditingFromUrlParameter(){
+	var setID = getAllUrlParams(document.URL).setid;
+	console.log(setID);
+	if(setID === null || setID === undefined)
+		return;
+	else
+		loadItemValuesForEditing(setID.toString());
+}
+
 
 function loadSetForEditing(id){
 	var set = findSet(id);
@@ -173,6 +187,7 @@ function loadSetForEditing(id){
 	
 	editSetMode = true;
 	$('#Warning').fadeIn();
+	$('#Warning').html("<p style='margin-top: 5px;'>You are currently editing a set. Press here to abort!</p>");
 	editSetID = id;
 	
 	document.getElementById("setDescription").value = set.description;
@@ -201,14 +216,28 @@ function loadSets(){
 }
 });
 	$.getJSON("http://xoaproductions.com/ItemDesigner/savedItemData/Sets.json", function(jsonData){
-		console.log(jsonData);
 		SetList = jsonData;
-		//if(currentSiteState === siteStateEnum.Browse){
-		//	displayItems();
-		//}
-		//if(currentSiteState === siteStateEnum.Create){
-		//	loadItemForEditingFromUrlParameter();
-		//}
+		if(currentSiteState === siteStateEnum.CreateSet){
+			loadSetForEditingFromUrlParameter();
+		}
+		if(currentSiteState === siteStateEnum.Browse){
+			displaySets();
+		}
 		
 	});
+}
+
+function clearAllSetInputs(){
+	
+	$("#ContainedItemsList").find("tr:gt(0)").remove(); //flush table
+	document.getElementById("setDescription").value = "";
+	document.getElementById("setName").value = "";
+	document.getElementById("setBonus1").value = "";
+	document.getElementById("setBonus2").value = "";
+	document.getElementById("setBonus3").value = "";
+	document.getElementById("setBonus4").value = "";
+	document.getElementById("setBonus5").value = "";
+	
+	itemSelection = [];
+	
 }

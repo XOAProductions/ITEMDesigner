@@ -48,3 +48,27 @@ function displayItems(){
 		
 	}
 }
+
+function displaySets(){
+	$("#setBrowserTable").find("tr:gt(0)").remove(); //flush table first
+	
+	var tableContents = "";
+	var i = 0;
+	for(i = 0; i < SetList.length; i++){
+			tableContents += "<tr>";
+			tableContents += "<td>" + SetList[i].name + "</td>";
+			tableContents += "<td>" + SetList[i].id + "</td>";
+			tableContents += "<td> <button type = 'button' id='" + SetList[i].id + "_SetEdit'> Edit </ button></td>";
+			tableContents += "<td> <button type = 'button' id='" + SetList[i].id + "_SetDelete'> Delete </ button></td>";
+			tableContents += "</tr>";
+			
+	}
+	
+	$('#setBrowserTable > tbody:last-child').append(tableContents);
+	
+	for(i = 0; i < SetList.length; i++){
+		var buttonEdit = document.getElementById(SetList[i].id + "_SetEdit").setAttribute("onClick", "loadSetForEditing('" +SetList[i].id+ "'); addUrlParameter('?mode=createSet&setID=" +SetList[i].id+ "'); configureViewport(false);") ;
+		var buttonView = document.getElementById(SetList[i].id + "_SetDelete").setAttribute("onClick", "deleteSet('" +SetList[i].id+ "')");
+		
+	}
+}

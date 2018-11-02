@@ -233,6 +233,7 @@ function loadItemValuesForEditing(id){
 	var stats = item.Statistics;
 	editMode = true;
 	$('#Warning').fadeIn();
+	$('#Warning').html("<p style='margin-top: 5px;'>You are currently editing an item. Press here to abort!</p>");
 	document.getElementById("ItemType").disabled = true;
 	var i = 0;
 	for(i = 0; i< baseValueNames.length; i++){
@@ -413,8 +414,10 @@ function getItemType(){
 
 function resetFromEditMode(){
 	editMode = false;
+	editSetMode = false;
 	$('#Warning').fadeOut();
 	clearAllInputs();
+	clearAllSetInputs();
 }
 
 //called on load of the body
@@ -422,6 +425,7 @@ function onLoad(){
 	getItemType();
 	hideUnwantedMainStatistics();
 	clearAllInputs();
+	clearAllSetInputs();
 	
 	loadData();
 	loadSets();
