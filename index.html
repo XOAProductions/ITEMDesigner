@@ -99,7 +99,7 @@
         <label for="uniqueSecondary" id="textarealabel">Unique Secondary:</label>
         <textarea name="uniqueSecondary" class="uniqueSecondary" id="uniqueSecondary" onChange="updatePreview();"></textarea>
       </div>
-<input name="button" onClick="createItem()" type="button" class="createItem createItemButton" value="Create Item">
+<input name="button" onClick="createItem()" type="button" id="createItemButton" class="createItem createItemButton" value="Create Item">
     </div>
 <div class="itemtypequality">
       <label for="ItemType" class="itemtype">Item Type:</label>
@@ -415,7 +415,8 @@
       </table>
     </div>
     <br />
-    <button id="Create Set" class="CreateSetButton" onClick="createItemSet();">Create Set</button>
+   
+	  <input name="button" onClick="createItemSet();" type="button" id="createSetButton" class="CreateSetButton" value="Create Set">
         </div>
 </div>
   

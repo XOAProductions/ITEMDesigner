@@ -234,6 +234,7 @@ function loadItemValuesForEditing(id){
 	editMode = true;
 	$('#Warning').fadeIn();
 	$('#Warning').html("<p style='margin-top: 5px;'>You are currently editing an item. Press here to abort!</p>");
+	document.getElementById("createItemButton").setAttribute("value", "Save Changes");
 	document.getElementById("ItemType").disabled = true;
 	var i = 0;
 	for(i = 0; i< baseValueNames.length; i++){
@@ -416,6 +417,8 @@ function resetFromEditMode(){
 	editMode = false;
 	editSetMode = false;
 	$('#Warning').fadeOut();
+	document.getElementById("createItemButton").setAttribute("value", "Create Item");
+	document.getElementById("createSetButton").setAttribute("value", "Create Set");
 	clearAllInputs();
 	clearAllSetInputs();
 }

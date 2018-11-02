@@ -188,6 +188,7 @@ function loadSetForEditing(id){
 	editSetMode = true;
 	$('#Warning').fadeIn();
 	$('#Warning').html("<p style='margin-top: 5px;'>You are currently editing a set. Press here to abort!</p>");
+	document.getElementById("createSetButton").setAttribute("value", "Save Changes");
 	editSetID = id;
 	
 	document.getElementById("setDescription").value = set.description;
