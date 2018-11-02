@@ -13,9 +13,10 @@
 <script src="js/Item.js"></script> 
 <script src="js/itemSet.js"></script>
 <script src="js/createItem.js"></script>
+
 <script src="js/itemPreview.js"></script>
 <script src="js/itemBrowser.js"></script>
-	
+<script src="js/createItemSet.js"></script>	
 <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
 <script>var __adobewebfontsappname__="dreamweaver"</script>
 <script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
@@ -32,21 +33,21 @@
   
   <header>
     <div class ="navigationTop" id="navigationTop"> <a href="">
-    <h4 class="logo" data_temp_dwid="1">ITEM Designer V0.01</h4>
-  </a>
-	
-	  <div class="navigationIndicator" id="navigationIndicator">  <hr>
-</div>
-	  <nav >
-	  <ul>
-	    <li><a onClick="addUrlParameter('?mode=create'); configureViewport();">CREATE ITEMS</a></li>
-	    <li><a onClick="addUrlParameter('?mode=createSet'); configureViewport();">CREATE SETS</a></li>
-	    <li><a onClick="addUrlParameter('?mode=browse'); configureViewport();">BROWSE ITEMS/SETS</a></li>
-	    <li> <a onClick="addUrlParameter('?mode=calculate'); configureViewport();">HERO CALCULATOR</a></li>
-	    <li> <a onClick="addUrlParameter('?mode=download'); configureViewport();">DOWNLOADS</a></li>
-      </ul>
-  </nav>
-</div>
+      <h4 class="logo" data_temp_dwid="1">ITEM Designer V0.01</h4>
+      </a>
+      <div class="navigationIndicator" id="navigationIndicator">
+        <hr>
+      </div>
+      <nav >
+        <ul>
+          <li><a onClick="addUrlParameter('?mode=create'); configureViewport();">CREATE ITEMS</a></li>
+          <li><a onClick="addUrlParameter('?mode=createSet'); configureViewport();">CREATE SETS</a></li>
+          <li><a onClick="addUrlParameter('?mode=browse'); configureViewport();">BROWSE ITEMS/SETS</a></li>
+          <li> <a onClick="addUrlParameter('?mode=calculate'); configureViewport();">HERO CALCULATOR</a></li>
+          <li> <a onClick="addUrlParameter('?mode=download'); configureViewport();">DOWNLOADS</a></li>
+        </ul>
+      </nav>
+    </div>
 </header>
   <!-- Hero Section -->
   <!-- About Section -->
@@ -98,7 +99,7 @@
         <label for="uniqueSecondary" id="textarealabel">Unique Secondary:</label>
         <textarea name="uniqueSecondary" class="uniqueSecondary" id="uniqueSecondary" onChange="updatePreview();"></textarea>
       </div>
-<input name="button" onClick="createItem()" type="button" class="createItem" value="Create Item">
+<input name="button" onClick="createItem()" type="button" class="createItem createItemButton" value="Create Item">
     </div>
 <div class="itemtypequality">
       <label for="ItemType" class="itemtype">Item Type:</label>
@@ -370,27 +371,53 @@
   </div>
 </div>
 <div class="ItemSetCreator" id = "ItemSetCreator">
-	<label for="setName" class="setName" id="setNameLabel">Set Name:</label>
-      <input name="setName" type="text" class="setName" id="setName">
-	<br />
-	<label for="setDescription" id="setDescriptionLabel" class="setDescription">Set Description: </label>
-        <textarea name="setDescription" class="setDescription" id="setDescription" onChange="updatePreview();"></textarea>
-	<br />
-	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 1: </label>
-        <textarea name="setBonus" class="setBonus" id="setBonus1" onChange="updatePreview();"></textarea>
-	<br />
-	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 2: </label>
-        <textarea name="setBonus" class="setBonus" id="setBonus2" onChange="updatePreview();"></textarea>
-	<br />
-	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 3: </label>
-        <textarea name="setBonus" class="setBonus" id="setBonus3" onChange="updatePreview();"></textarea>
-	<br />
-	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 4: </label>
-        <textarea name="setBonus" class="setBonus" id="setBonus4" onChange="updatePreview();"></textarea>
-	<br />
-	<label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 5: </label>
-        <textarea name="setBonus" class="setBonus" id="setBonus5" onChange="updatePreview();"></textarea>
-	</div>
+  <div class="ItemSetCreatorContent" id="ItemSetCreatorContent">
+    <label for="setName" class="setName" id="setNameLabel">Set Name:</label>
+    <input name="setName" type="text" class="setName" id="setName">
+    <br />
+    <label for="setDescription" id="setDescriptionLabel" class="setDescription">Set Description: </label>
+    <textarea name="setDescription" class="setDescription" id="setDescription" onChange="updatePreview();"></textarea>
+    <br />
+    <label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 1: </label>
+    <textarea name="setBonus" class="setBonus" id="setBonus1" onChange="updatePreview();"></textarea>
+    <br />
+    <label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 2: </label>
+    <textarea name="setBonus" class="setBonus" id="setBonus2" onChange="updatePreview();"></textarea>
+    <br />
+    <label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 3: </label>
+    <textarea name="setBonus" class="setBonus" id="setBonus3" onChange="updatePreview();"></textarea>
+    <br />
+    <label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 4: </label>
+    <textarea name="setBonus" class="setBonus" id="setBonus4" onChange="updatePreview();"></textarea>
+    <br />
+    <label for="setBonus" id="setBonusLabel" class="setDescription">Set Bonus 5: </label>
+    <textarea name="setBonus" class="setBonus" id="setBonus5" onChange="updatePreview();"></textarea>
+    <div class="containedItemDiv"> <a>Contained Items:</a>
+      <table width="200" border="0" id="ContainedItemsList">
+        <tbody>
+          <tr>
+            <td>Item Name</td>
+            <td>Item ID</td>
+            <td>Remove</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="setItemsListDiv"> <a>All Set Items:</a>
+      <table width="200" border="0" id="SetItemsList">
+        <tbody>
+          <tr>
+            <td>Item Name</td>
+            <td>Item ID</td>
+            <td>Add</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <button id="Create Set" class="CreateSetButton" onClick="createItemSet();">Create Set</button>
+        </div>
+</div>
   
   <div class = "ItemBrowser" id = "ItemBrowser" >
     <label for="ItemType" class="itemtype">Item Type:</label>
@@ -423,27 +450,39 @@
     
   </tbody>
 </table>
+<table width="200" border="0" class ="setBrowserTable" id="setBrowserTable">
+  <tbody>
+    <tr>
+      <td>Set Name</td>
+      <td>Id</td>
+      <td>Edit</td>
+		<td>Delete</td>
+    </tr>
+ 
+</table>
 
   </div>
 	
 	<div class = "ItemBrowser" id = "Downloads" > 
 	 <button onClick="download('http://xoaproductions.com/ItemDesigner/savedItemData/Items.json');">Download Items.json</button>
+		<br/>
+		<br/>
+		<button onClick="download('http://xoaproductions.com/ItemDesigner/savedItemData/Sets.json');">Download Sets.json</button>
 	</div>
-	
-	
-  <div class="copyright"> &copy;2018 - XOAProductions</div>
-  <div class="ItemPreview" id="ItemPreview">
+<div class="ItemPreview" id="ItemPreview">
     <h6 class="previewText" id="previewText"></h6>
-    <h1 class="ItemPreviewName" id="ItemPreviewName"></h1>
-    <h1 class="ItemPreviewMainStat" id="ItemPreviewMainStat"></h1>
-    <h1 class="ItemPreviewSecondaryStatText" id="ItemPreviewSecondaryStatText"><br>
-      <br>
-      Secondary: </h1>
-    <h1 class="ItemPreviewSeondaryStats" id="ItemPreviewSecondaryStats"></h1>
-    <h1 class="ItemPreviewSecondaryStatText" id="ItemPreviewSecondaryStatText">Unique Secondary: </h1>
-    <h1 class="ItemPreviewUniqueSecondary" id="ItemPreviewUniqueSecondary"></h1>
-    <h1 class="ItemPreviewDescription" id="ItemPreviewDescription">&nbsp;</h1>
+      <h1 class="ItemPreviewName" id="ItemPreviewName"></h1>
+      <h1 class="ItemPreviewMainStat" id="ItemPreviewMainStat"></h1>
+      <h1 class="ItemPreviewSecondaryStatText" id="ItemPreviewSecondaryStatText"><br>
+        <br>
+        Secondary: </h1>
+      <h1 class="ItemPreviewSeondaryStats" id="ItemPreviewSecondaryStats"></h1>
+      <h1 class="ItemPreviewSecondaryStatText" id="ItemPreviewSecondaryStatText">Unique Secondary: </h1>
+      <h4 class="ItemPreviewUniqueSecondary" id="ItemPreviewUniqueSecondary"></h4>
+      <h8 class="ItemPreviewDescription" id="ItemPreviewDescription">&nbsp;</h8>
   </div>
+  <div class="aligner" id="aligner"></div>
+  <div class="copyright"> &copy;2018 - XOAProductions</div>
 </div>
 <!-- Main Container Ends -->
 </body>

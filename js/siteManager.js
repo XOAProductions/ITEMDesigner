@@ -81,6 +81,7 @@ function stateTransition(exitEditMode=true){
 		$("#ItemPreview").fadeIn();
 		$("#ItemSetCreator").fadeOut();
 		displayItems();
+		displaySets();
 		resetFromEditMode();
 		
 	}
@@ -107,7 +108,9 @@ function stateTransition(exitEditMode=true){
 		$("#Downloads").fadeOut();
 		$("#ItemPreview").fadeOut();
 		$("#ItemSetCreator").fadeIn();
-		resetFromEditMode();
+		loadAllSetItems();
+		if(exitEditMode)
+			resetFromEditMode();
 	}
 }
 

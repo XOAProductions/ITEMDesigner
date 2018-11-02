@@ -5,23 +5,24 @@ class ItemSet{
 	constructor(Description, Name, SetBoniList){
 		this.name = Name;
 		this.description = Description;
-		this.itemList = [];
+		this.itemIDList = [];
 		if(!this.id){
 			this.id = ID();
 		} 
 		this.setBoniList = SetBoniList;
+		
 	}
 	
-	addItem(item){
-		if(this.itemList.contains(item))
+	addItemID(itemID){
+		if(this.itemIDList.includes(itemID))
 			return;
-		this.itemList.push(item);
+		this.itemIDList.push(itemID);
 	}
 	
-	removeItem(item){
-		if(!this.itemList.contains(item))
+	removeItem(itemID){
+		if(!this.itemIDList.includes(itemID))
 			return;
 		
-		this.itemList.remove(item);
+		this.itemIDList.remove(itemID);
 	}
 }

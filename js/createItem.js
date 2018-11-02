@@ -6,6 +6,8 @@ var editMode = false;
 
 var ItemsLists = {BodyArmorList : [], BootsList: [], HelmetList: [], TriggerList: [], LoadingMechanismList: [], FiringMechanismList: [], EnergyContainerList: [], BarrelList: [], AmmoClipList: [], StockList: [], BarrelAttachmentList: [], ScopeList: [], CosmeticAttachmentList: [], BossAbilityItemList:[]};
 
+var ItemsListsNames = ["BodyArmorList", "BootsList", "HelmetList", "TriggerList", "LoadingMechanismList", "FiringMechanismList", "EnergyContainerList", "BarrelList", "AmmoClipList", "StockList", "BarrelAttachmentList", "ScopeList", "CosmeticAttachmentList", "BossAbilityItemList"];
+
 //called when create item is pressed
 function createItem(){
 	var values = getAllInputValues();
@@ -231,6 +233,7 @@ function loadItemValuesForEditing(id){
 	var stats = item.Statistics;
 	editMode = true;
 	$('#Warning').fadeIn();
+	$('#Warning').html("<p style='margin-top: 5px;'>You are currently editing an item. Press here to abort!</p>");
 	document.getElementById("ItemType").disabled = true;
 	var i = 0;
 	for(i = 0; i< baseValueNames.length; i++){
@@ -411,8 +414,10 @@ function getItemType(){
 
 function resetFromEditMode(){
 	editMode = false;
+	editSetMode = false;
 	$('#Warning').fadeOut();
 	clearAllInputs();
+	clearAllSetInputs();
 }
 
 //called on load of the body
@@ -420,8 +425,10 @@ function onLoad(){
 	getItemType();
 	hideUnwantedMainStatistics();
 	clearAllInputs();
+	clearAllSetInputs();
 	
 	loadData();
+	loadSets();
 	
 }
 
