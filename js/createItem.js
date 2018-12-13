@@ -331,11 +331,11 @@ function getAllInputValues(checkForErrors = true){
 		}
 			if(valueMin === "" && valueMax !== "")
 			{
-				errorArray.push(baseValueNames[i] + ": minimum value is empty");
+				errorArray.push(mainValueNames[i] + ": minimum value is empty");
 			}
 			else if(valueMax === "" && valueMin !== "")
 			{
-				errorArray.push(baseValueNames[i] + ": maximum value is empty");
+				errorArray.push(mainValueNames[i] + ": maximum value is empty");
 			}
 		
 			valueMin = parseFloat(valueMin);
@@ -345,7 +345,7 @@ function getAllInputValues(checkForErrors = true){
 			
 			if(valueMax < valueMin)
 			{
-				errorArray.push (baseValueNames[i] + ": maximum value is lower than minimum");
+				errorArray.push (mainValueNames[i] + ": maximum value is lower than minimum");
 			}
 			
 			var statistic = new StatisticValue(valueMin, valueMax, calculationType, guaranteedRandom);
